@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/features/add_list/widgets/add_list_body.dart';
+import 'package:todo_list/model/model.dart';
 
 /// {@template add_list_page}
 /// A description for AddListPage
@@ -42,6 +43,7 @@ class AddListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddListBody();
+    return AddListBody(
+        category: CategoryResponse(personal: "Personal", work: "Work"));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/model/model.dart';
 
 /// {@template add_list_body}
 /// Body of the AddListPage.
@@ -7,22 +8,15 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class AddListBody extends StatefulWidget {
   /// {@macro add_list_body}
-  const AddListBody({super.key});
+  const AddListBody({required this.category, super.key});
+
+  final CategoryResponse category;
 
   @override
   State<AddListBody> createState() => _AddListBodyState();
 }
 
 class _AddListBodyState extends State<AddListBody> {
-  final categories = const [
-    {
-      'category': "Personal",
-    },
-    {
-      'category': "Work",
-    },
-  ];
-
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
@@ -66,27 +60,22 @@ class _AddListBodyState extends State<AddListBody> {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                const SizedBox(height: 16.0),
-                const Text("Category"),
-                const SizedBox(height: 8.0),
-                Row(
-                  children: categories.map((category) {
-                    return Row(
-                      children: [
-                        SizedBox(
-                          width: 200.0, // Set the desired width here
-                          child: ListTile(
-                            tileColor: Colors.grey[200],
-                            title: Text(category['category'] ?? "categories"),
-                          ),
-                        ),
-                        const SizedBox(width: 8.0),
-                      ],
-                    );
-                  }).toList(),
+                SizedBox(
+                  width: 200,
+                  child: ListTile(
+                    tileColor: Colors.grey,
+                    title: Text(widget.category.personal),
+                  ),
+                ),
+                const SizedBox(width: 8.0),
+                SizedBox(
+                  width: 200,
+                  child: ListTile(
+                    tileColor: Colors.grey,
+                    title: Text(widget.category.work),
+                  ),
                 ),
               ],
             ),
