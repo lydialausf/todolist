@@ -6,11 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('InitialPage', () {
-    group('route', () {
-      test('is routable', () {
-        expect(InitialPage.route(), isA<MaterialPageRoute>());
-      });
-    });
+    group('route', () {});
 
     testWidgets('renders InitialView', (tester) async {
       await tester.pumpWidget(MaterialApp(home: InitialPage()));

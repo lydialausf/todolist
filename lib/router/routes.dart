@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/features/add_list/add_list.dart';
+import 'package:todo_list/features/calendar/view/calendar_page.dart';
 import 'package:todo_list/features/edit_list/edit_list.dart';
 import 'package:todo_list/features/initial/initial.dart';
 
@@ -20,6 +21,11 @@ class MyTodoListRouter {
               path: '/edit_list',
               builder: (context, state) {
                 return const EditListPage();
+              }),
+          GoRoute(
+              path: '/calendar_page',
+              builder: (context, state) {
+                return const CalendarPage();
               }),
         ]),
   ]);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_list/features/add_list/widgets/add_list_body.dart';
 
 /// {@template add_list_page}
@@ -20,7 +21,8 @@ class AddListPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton(onPressed: () {}, child: const Text("Cancel")),
+            TextButton(
+                onPressed: () => context.pop(), child: const Text("Cancel")),
             TextButton(onPressed: () {}, child: const Text("Save")),
           ],
         ),

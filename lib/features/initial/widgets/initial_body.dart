@@ -11,6 +11,6 @@ class InitialBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("hello"));
+    return const Center(child: Text("Initial Page"));
   }
 }
