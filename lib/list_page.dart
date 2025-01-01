@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:todolist/add_todo_page.dart';
 import 'package:todolist/database_service.dart';
 import 'package:todolist/edit_todo_page.dart';
-import 'package:todolist/preview_page.dart';
 import 'package:todolist/todo.dart';
 
 class ListPage extends StatelessWidget {
@@ -13,19 +12,15 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('dd-MM-yyyy h:mm a');
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+                builder: (BuildContext context) => AddTodoPage())),
+      ),
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Firebase Todo"),
-            IconButton(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                        builder: (BuildContext context) => AddTodoPage())),
-                icon: Icon(Icons.add))
-          ],
-        ),
+        title: Text("Firebase Todo"),
       ),
       body: StreamBuilder(
           stream: DatabaseService().getTodos(),
