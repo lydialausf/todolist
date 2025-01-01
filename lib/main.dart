@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/firebase_options.dart';
-import 'package:todolist/list_page.dart';
+import 'package:todolist/controller/firebase_options.dart';
+import 'package:todolist/presentation/list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

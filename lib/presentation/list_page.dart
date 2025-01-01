@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todolist/add_todo_page.dart';
-import 'package:todolist/database_service.dart';
-import 'package:todolist/edit_todo_page.dart';
-import 'package:todolist/todo.dart';
+import 'package:todolist/controller/controller.dart';
+import 'package:todolist/model/model.dart';
+import 'package:todolist/presentation/presentation.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({super.key});

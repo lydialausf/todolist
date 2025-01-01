@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/database_service.dart';
-import 'package:todolist/todo.dart';
+import 'package:todolist/controller/controller.dart';
+import 'package:todolist/model/model.dart';
 
 class EditTodoPage extends StatefulWidget {
   const EditTodoPage({required this.todo, super.key});
