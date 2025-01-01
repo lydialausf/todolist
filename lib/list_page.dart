@@ -43,29 +43,18 @@ class ListPage extends StatelessWidget {
 
                   Todo todoDoc = Todo.fromDocumentSnapshot(todo!);
                   return ListTile(
-                    trailing: PopupMenuButton(itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          value: 'delete',
-                          child: Text('Delete Todo'),
-                          onTap: () => DatabaseService().deleteTodo(todoDoc.id),
-                        ),
-                        PopupMenuItem(
-                          value: 'edit',
-                          child: Text('Edit Todo'),
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      PreviewPage(todo: todoDoc))),
-                        ),
-                      ];
-                    }),
+                    trailing: Checkbox(
+                      value: todo['completed'],
+                      onChanged: (value) {
+                        DatabaseService().updateTodo(todoDoc.id,
+                            todo['description'], todo['title'], value!);
+                      },
+                    ),
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                PreviewPage(todo: todoDoc))),
+                                EditTodoPage(todo: todoDoc))),
                     title: Text(
                       todo['title'],
                     ),
