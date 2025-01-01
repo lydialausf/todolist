@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:todolist/add_todo_page.dart';
 import 'package:todolist/database_service.dart';
 import 'package:todolist/edit_todo_page.dart';
+import 'package:todolist/preview_page.dart';
 import 'package:todolist/todo.dart';
 
 class ListPage extends StatelessWidget {
@@ -42,11 +43,29 @@ class ListPage extends StatelessWidget {
 
                   Todo todoDoc = Todo.fromDocumentSnapshot(todo!);
                   return ListTile(
+                    trailing: PopupMenuButton(itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          value: 'delete',
+                          child: Text('Delete Todo'),
+                          onTap: () => DatabaseService().deleteTodo(todoDoc.id),
+                        ),
+                        PopupMenuItem(
+                          value: 'edit',
+                          child: Text('Edit Todo'),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      PreviewPage(todo: todoDoc))),
+                        ),
+                      ];
+                    }),
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                EditTodoPage(todo: todoDoc))),
+                                PreviewPage(todo: todoDoc))),
                     title: Text(
                       todo['title'],
                     ),

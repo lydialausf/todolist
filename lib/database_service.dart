@@ -44,4 +44,15 @@ class DatabaseService {
           return Future.error("Error updating todo: $error");
         });
   }
+
+  Future<void> deleteTodo(String id) async {
+    await todos
+        .doc(id)
+        .delete()
+        .whenComplete(() => print("Todo deleted"))
+        .onError((error, stackTrace) {
+      print("Error deleting todo: $error");
+      return Future.error("Error deleting todo: $error");
+    });
+  }
 }

@@ -36,6 +36,9 @@ class _EditTodoPageState extends State<EditTodoPage> {
                 controller: descriptionController,
                 decoration: InputDecoration(hintText: "Description"),
               ),
+              SizedBox(
+                height: 16,
+              ),
               ElevatedButton(
                 onPressed: () {
                   DatabaseService().updateTodo(
