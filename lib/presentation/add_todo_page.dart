@@ -31,6 +31,9 @@ class _AddTodoPageState extends State<AddTodoPage> {
               controller: descriptionController,
               decoration: InputDecoration(hintText: "Description"),
             ),
+            SizedBox(
+              height: 16,
+            ),
             ElevatedButton(
               onPressed: () {
                 DatabaseService()

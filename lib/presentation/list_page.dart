@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todolist/controller/controller.dart';
+import 'package:todolist/main.dart';
 import 'package:todolist/model/model.dart';
 import 'package:todolist/presentation/presentation.dart';
+import 'package:todolist/theme.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({super.key});
@@ -19,6 +21,18 @@ class ListPage extends StatelessWidget {
                 builder: (BuildContext context) => AddTodoPage())),
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(MyAppThemes.themeNotifier.value == ThemeMode.light
+                  ? Icons.dark_mode
+                  : Icons.light_mode),
+              onPressed: () {
+                MyAppThemes.themeNotifier.value =
+                    MyAppThemes.themeNotifier.value == ThemeMode.light
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+              })
+        ],
         title: Text("Firebase Todo"),
       ),
       body: StreamBuilder(
@@ -70,6 +84,10 @@ class ListPage extends StatelessWidget {
                                 EditTodoPage(todo: todoDoc))),
                     title: Text(
                       todo['title'],
+                      style: TextStyle(
+                          decoration: todo['completed']
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
