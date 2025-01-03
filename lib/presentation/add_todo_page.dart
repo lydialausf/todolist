@@ -12,6 +12,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
   final TextEditingController titleController = TextEditingController();
 
   final TextEditingController descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +22,45 @@ class _AddTodoPageState extends State<AddTodoPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(hintText: "Title"),
-            ),
-            TextField(
-              controller: descriptionController,
-              decoration: InputDecoration(hintText: "Description"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                DatabaseService()
-                    .addTodo(titleController.text, descriptionController.text);
-                Navigator.pop(context);
-              },
-              child: Text("Add Todo"),
-            )
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: titleController,
+                decoration: InputDecoration(hintText: "Title"),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter title";
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: descriptionController,
+                decoration: InputDecoration(hintText: "Description"),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter description";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    DatabaseService().addTodo(
+                        titleController.text, descriptionController.text);
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text("Add Todo"),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -17,6 +17,8 @@ class _EditTodoPageState extends State<EditTodoPage> {
 
   late final TextEditingController descriptionController =
       TextEditingController(text: widget.todo.description);
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,31 +28,48 @@ class _EditTodoPageState extends State<EditTodoPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: titleController,
-                decoration: InputDecoration(hintText: "Title"),
-              ),
-              TextField(
-                controller: descriptionController,
-                decoration: InputDecoration(hintText: "Description"),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  DatabaseService().updateTodo(
-                      widget.todo.id,
-                      descriptionController.text,
-                      titleController.text,
-                      widget.todo.completed);
-                  Navigator.pop(context);
-                },
-                child: Text("Update Todo"),
-              )
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: titleController,
+                  decoration: InputDecoration(hintText: "Title"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter title";
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: descriptionController,
+                  decoration: InputDecoration(hintText: "Description"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter description";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      DatabaseService().updateTodo(
+                          widget.todo.id,
+                          descriptionController.text,
+                          titleController.text,
+                          widget.todo.completed);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text("Update Todo"),
+                )
+              ],
+            ),
           ),
         ),
       ),
