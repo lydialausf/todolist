@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todolist/controller/controller.dart';
-import 'package:todolist/main.dart';
 import 'package:todolist/model/model.dart';
+import 'package:todolist/navigator/navigator.dart';
 import 'package:todolist/presentation/presentation.dart';
-import 'package:todolist/theme.dart';
+import 'package:todolist/widgets/theme.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({super.key});
@@ -60,14 +60,13 @@ class ListPage extends StatelessWidget {
                               DatabaseService().deleteTodo(todoDoc.id);
                             }),
                         PopupMenuItem(
-                          value: 'edit',
-                          child: Text('Edit Todo'),
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      EditTodoPage(todo: todoDoc))),
-                        ),
+                            value: 'edit',
+                            child: Text('Edit Todo'),
+                            onTap: () => TodoNavigator.push(
+                                context,
+                                EditTodoPage(
+                                  todo: todoDoc,
+                                ))),
                       ];
                     }),
                     leading: Checkbox(
@@ -77,11 +76,8 @@ class ListPage extends StatelessWidget {
                             todo['description'], todo['title'], value!);
                       },
                     ),
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                EditTodoPage(todo: todoDoc))),
+                    onTap: () => TodoNavigator.push(
+                        context, EditTodoPage(todo: todoDoc)),
                     title: Text(
                       todo['title'],
                       style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/controller/controller.dart';
 import 'package:todolist/model/model.dart';
+import 'package:todolist/navigator/navigator.dart';
 
 class EditTodoPage extends StatefulWidget {
   const EditTodoPage({required this.todo, super.key});
@@ -63,7 +64,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
                           descriptionController.text,
                           titleController.text,
                           widget.todo.completed);
-                      Navigator.pop(context);
+                      TodoNavigator.pop(context);
                     }
                   },
                   child: Text("Update Todo"),

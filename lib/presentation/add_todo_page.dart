@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/controller/controller.dart';
+import 'package:todolist/navigator/navigator.dart';
 
 class AddTodoPage extends StatefulWidget {
   const AddTodoPage({super.key});
@@ -54,7 +55,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
                   if (_formKey.currentState!.validate()) {
                     DatabaseService().addTodo(
                         titleController.text, descriptionController.text);
-                    Navigator.pop(context);
+                    TodoNavigator.pop(context);
                   }
                 },
                 child: Text("Add Todo"),
